@@ -13,7 +13,14 @@ pipeline {
         }
         stage('Deploy') { 
             steps {
-                sh 'echo deploying'
+                sh 'ssh -o StrictHostKeyChecking=no deployment-user@192.168.56.101 "source venv/bin/activate; \
+                cd polling_app; \
+                git pull origin main; \
+                pip install -r requirements.txt --no-warn-script-location; \
+                python manage.py migrate; \
+                deactivate; \
+                sudo systemctl restart nginx; \
+                sudo systemctl restart gunicorn"'
             }
         }
     }
