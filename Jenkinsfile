@@ -23,7 +23,11 @@ pipeline {
                 sudo systemctl restart gunicorn"'
             }
         }
-        stage('Deploy to Prod') { 
+        stage('Deploy to Prod') {
+            input {
+                message 'shall we deploy to production'
+                ok 'Yes Please!'
+            } 
             steps {
                 sh 'ssh -o StrictHostKeyChecking=no deployment-user@192.168.56.101 "source venv/bin/activate; \
                 cd polling_app; \
