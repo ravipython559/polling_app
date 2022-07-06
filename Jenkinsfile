@@ -32,6 +32,7 @@ pipeline {
                 sh 'ssh -o StrictHostKeyChecking=no deployment-user@192.168.56.101 "source venv/bin/activate; \
                 cd polling_app; \
                 git pull origin main; \
+                git fetch; \
                 git merge origin/staging-main; \
                 git push origin main; \
                 git pull origin main; \

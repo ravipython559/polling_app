@@ -9,8 +9,7 @@
         <div class="card-body">
             <p class="lead">{{ question.question_text }}</p>
             <a href="{% url 'polls:detail' question.id %}" class="btn btn-success btn-sm">Vote Now</a>
-            <p>test</p>
-    
+            
         </div>
     </div>
     {% endfor %}
