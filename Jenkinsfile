@@ -20,7 +20,7 @@ pipeline {
                 python manage.py migrate; \
                 deactivate; \
                 sudo systemctl restart nginx; \
-                sudo systemctl restart gunicorn"'
+                sudo systemctl restart gunicorn;'
             }
         }
         stage('Deploy to Prod') {
@@ -32,14 +32,14 @@ pipeline {
                 sh 'ssh -o StrictHostKeyChecking=no deployment-user@192.168.56.101 "source venv/bin/activate; \
                 cd polling_app; \
                 git pull origin main; \
-                git merge staging-main; \
+                git merge origin/staging-main; \
                 git push origin main; \
                 git pull origin main; \
                 pip install -r requirements.txt --no-warn-script-location; \
                 python manage.py migrate; \
                 deactivate; \
                 sudo systemctl restart nginx; \
-                sudo systemctl restart gunicorn"'
+                sudo systemctl restart gunicorn;'
             }
         }
     }
