@@ -33,6 +33,8 @@ pipeline {
                 cd polling_app; \
                 git pull origin main; \
                 git merge staging-main; \
+                git push origin main; \
+                git pull origin main; \
                 pip install -r requirements.txt --no-warn-script-location; \
                 python manage.py migrate; \
                 deactivate; \
