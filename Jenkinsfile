@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh 'ssh -o StrictHostKeyChecking=no deployment-user@192.168.56.104 "source venv/bin/activate; \
                 cd polling_app; \
-                git pull origin staging-main; \
+                git pull origin main; \
                 pip install -r requirements.txt --no-warn-script-location; \
                 python manage.py migrate; \
                 deactivate; \
@@ -31,10 +31,6 @@ pipeline {
             steps {
                 sh 'ssh -o StrictHostKeyChecking=no deployment-user@192.168.56.101 "source venv/bin/activate; \
                 cd polling_app; \
-                git pull origin main; \
-                git fetch; \
-                git merge origin/staging-main; \
-                git push origin main; \
                 git pull origin main; \
                 pip install -r requirements.txt --no-warn-script-location; \
                 python manage.py migrate; \
